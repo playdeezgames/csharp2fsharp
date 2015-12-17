@@ -30,3 +30,8 @@ let turnCounterClockwise direction =
     |> turnClockwise
     |> turnClockwise
 
+let toString = function
+    | North -> "North"
+    | East  -> "East"
+    | South -> "South"
+    | West  -> "West"

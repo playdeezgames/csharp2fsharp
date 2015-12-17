@@ -8,9 +8,6 @@ let MakeGrid (columns, rows) =
 
 let FindAllCardinal = Neighbor.findAll Cardinal.walk Cardinal.values
 
-let CardinalTurn (explorer: Explorer.Explorer<Cardinal.Direction>) =
-    {explorer with Orientation=Cardinal.values |> Seq.sortBy (fun e->Guid.NewGuid()) |> Seq.head}
-
 let CardinalWalk (explorer: Explorer.Explorer<Cardinal.Direction>) =
     {explorer with Position = explorer.Orientation |> Cardinal.walk explorer.Position}
 
@@ -20,14 +17,15 @@ let CanWalk (explorer: Explorer.Explorer<Cardinal.Direction>) =
     room.Contains next
 
 let Tracker (explorer: Explorer.Explorer<Cardinal.Direction>) = 
-    match explorer.Orientation with
-    | Cardinal.North -> Console.WriteLine("Facing North")
-    | Cardinal.East -> Console.WriteLine("Facing East")
-    | Cardinal.South ->  Console.WriteLine("Facing South")
-    | Cardinal.West -> Console.WriteLine("Facing West")
+    Console.WriteLine("Facing {0}", explorer.Orientation |> Cardinal.toString)
     Console.WriteLine("At location {0}, {1}", explorer.Position.Column, explorer.Position.Row)
+    let room = explorer.Maze.[explorer.Position]
+    Cardinal.values
+    |> List.filter (fun v -> (v |> Cardinal.walk explorer.Position) |> room.Contains)
+    |> List.map (fun v->v |> Cardinal.toString)
+    |> List.iter(fun v-> Console.WriteLine("Can go {0}",v))
     Console.ReadLine() |> ignore
-    explorer
+    {explorer with Orientation=Cardinal.values |> Seq.sortBy (fun e->Guid.NewGuid()) |> Seq.head}
 
 [<EntryPoint>]
 let main argv = 
@@ -35,6 +33,6 @@ let main argv =
     |> Maze.makeEmpty
     |> Maze.generate FindAllCardinal
     |> Explorer.create Cardinal.values
-    |> Explorer.explore Tracker CanWalk CardinalTurn CardinalWalk
+    |> Explorer.explore Tracker CanWalk CardinalWalk
     |> ignore
     0

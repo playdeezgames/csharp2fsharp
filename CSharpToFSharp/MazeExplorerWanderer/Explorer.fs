@@ -19,10 +19,10 @@ let create (directions: 'a list) (maze: Maze) =
     Orientation=direction;
     Maze=maze}
 
-let rec explore (action: Explorer<'a>->Explorer<'a>) (canWalk: Explorer<'a>->bool) turn walk (explorer: Explorer<'a>) =
-    let exploreNext = explore action canWalk turn walk
+let rec explore (action: Explorer<'a>->Explorer<'a>) (canWalk: Explorer<'a>->bool) walk (explorer: Explorer<'a>) =
+    let exploreNext = explore action canWalk walk
     let newExplorer = explorer |> action
     if newExplorer |> canWalk then
         newExplorer |> walk |> exploreNext
     else
-        newExplorer |> turn |> exploreNext
+        newExplorer |> exploreNext

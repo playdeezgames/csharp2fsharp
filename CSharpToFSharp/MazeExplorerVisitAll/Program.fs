@@ -27,7 +27,7 @@ let Tracker (explorer: Explorer.Explorer<Cardinal.Direction>) =
     | Cardinal.West -> Console.WriteLine("Facing West")
     Console.WriteLine("At location {0}, {1}", explorer.Position.Column, explorer.Position.Row)
     Console.ReadLine() |> ignore
-    explorer
+    explorer |> CardinalTurn
 
 [<EntryPoint>]
 let main argv = 
@@ -35,6 +35,6 @@ let main argv =
     |> Maze.makeEmpty
     |> Maze.generate FindAllCardinal
     |> Explorer.create Cardinal.values
-    |> Explorer.explore Tracker CanWalk CardinalTurn CardinalWalk
+    |> Explorer.explore Tracker CanWalk CardinalWalk
     |> ignore
     0
