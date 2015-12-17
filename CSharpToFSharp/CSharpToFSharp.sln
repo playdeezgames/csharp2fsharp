@@ -19,7 +19,7 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "MazeExplorerVisitAll", "Maz
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "MazeExplorerLibrary", "MazeExplorerLibrary\MazeExplorerLibrary.fsproj", "{752F2E8A-8833-45F2-8722-CA03357EA4DD}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "MazeExplorerWandeer", "MazeExplorerWandeer\MazeExplorerWandeer.fsproj", "{444DA439-070E-4F6A-AE38-F6BB0D61AAC6}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "MazeExplorerWanderer", "MazeExplorerWandeer\MazeExplorerWanderer.fsproj", "{444DA439-070E-4F6A-AE38-F6BB0D61AAC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

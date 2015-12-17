@@ -10,7 +10,7 @@
     <RootNamespace>MazeExplorerWandeer</RootNamespace>
     <AssemblyName>MazeExplorerWandeer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <Name>MazeExplorerWandeer</Name>
+    <Name>MazeExplorerWanderer</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
