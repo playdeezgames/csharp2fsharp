@@ -5,6 +5,10 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RockScissorsPaper", "RockSc
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Sokoban", "Sokoban\Sokoban.fsproj", "{362DE26B-A42B-4404-B6B4-5CD19DEEC0EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetLagCSharp", "JetLagCSharp\JetLagCSharp.csproj", "{49CD7328-C714-415D-A468-0CA64B1F3FB6}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "JetLagFSharp", "JetLagFSharp\JetLagFSharp.fsproj", "{22153171-F003-488A-A9D8-863FCECE475A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +23,14 @@ Global
 		{362DE26B-A42B-4404-B6B4-5CD19DEEC0EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{362DE26B-A42B-4404-B6B4-5CD19DEEC0EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{362DE26B-A42B-4404-B6B4-5CD19DEEC0EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49CD7328-C714-415D-A468-0CA64B1F3FB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49CD7328-C714-415D-A468-0CA64B1F3FB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49CD7328-C714-415D-A468-0CA64B1F3FB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49CD7328-C714-415D-A468-0CA64B1F3FB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22153171-F003-488A-A9D8-863FCECE475A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22153171-F003-488A-A9D8-863FCECE475A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22153171-F003-488A-A9D8-863FCECE475A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22153171-F003-488A-A9D8-863FCECE475A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
