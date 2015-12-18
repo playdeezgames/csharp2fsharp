@@ -22,7 +22,6 @@ let IsFinished explorer =
 type Command = 
      | Walk
      | Turn of Cardinal.Direction
-     | Wait
 
 let Decide explorer =
     let room = explorer.Maze.[explorer.Position]
@@ -38,7 +37,7 @@ let Decide explorer =
         
 
 let WalkAction explorer =
-    let next = Cardinal.walk explorer.Position explorer.Orientation
+    let next = explorer.Orientation |> Cardinal.walk explorer.Position
     let room = explorer.Maze.[explorer.Position]
     if room.Contains next then
         {explorer with Position = next}
@@ -48,15 +47,11 @@ let WalkAction explorer =
 let TurnAction direction explorer =
     {explorer with Orientation = direction}
 
-let WaitAction explorer =
-    explorer
-
 let Act command explorer =
     let nextExplorer = {explorer with State = explorer.State |> Set.remove explorer.Position }
     match command with
     | Walk           -> nextExplorer |> WalkAction
     | Turn direction -> nextExplorer |> TurnAction direction
-    | Wait           -> nextExplorer |> WaitAction
 
 
 let ReportPosition explorer =
@@ -84,7 +79,6 @@ let PromptUser explorer =
 
 let ReportDecision command =
     match command with
-    | Wait           -> Console.WriteLine("Explorer decides to wait.")
     | Walk           -> Console.WriteLine("Explorer decides to move.")
     | Turn direction -> Console.WriteLine("Explorer decides to turn to the {0}.", direction |> Cardinal.toString)
     command

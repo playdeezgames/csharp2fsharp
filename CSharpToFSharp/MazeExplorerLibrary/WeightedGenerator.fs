@@ -32,3 +32,16 @@ let combine (keyCombiner: 'a->'a->'b) (first: Map<'a, int>) (second:Map<'a,int>)
     |> Seq.map(fun (k,v)-> (k, v |> Seq.fold (fun acc (_,v2)-> acc + v2) 0))
     |> Map.ofSeq
 
+let ofPairs (items:('a * int) list) =
+    items
+    |> Map.ofList
+
+let ofList (items: 'a list) =
+    items
+    |> List.map (fun i->(i,1))
+    |> ofPairs
+
+let ofSeq (items: seq<'a>) =
+    items
+    |> Seq.map (fun i->(i,1))
+    |> Map.ofSeq
