@@ -8,7 +8,7 @@
     <ProjectGuid>444da439-070e-4f6a-ae38-f6bb0d61aac6</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>MazeExplorerWandeer</RootNamespace>
-    <AssemblyName>MazeExplorerWandeer</AssemblyName>
+    <AssemblyName>MazeExplorerWanderer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <Name>MazeExplorerWanderer</Name>
     <TargetFSharpCoreVersion>4.3.0.0</TargetFSharpCoreVersion>

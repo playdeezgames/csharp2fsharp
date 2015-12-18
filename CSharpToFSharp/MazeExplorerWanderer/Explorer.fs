@@ -3,10 +3,10 @@
 open Location
 open Maze
 
-type Explorer<'a> =
-    {Position: Location; Orientation: 'a; Maze: Maze}
+type Explorer<'direction> =
+    {Position: Location; Orientation: 'direction; Maze: Maze}
 
-let create (directions: 'a list) (maze: Maze) =
+let create (directions: 'direction list) (maze: Maze) =
     let position = maze
                    |> Map.toSeq
                    |> Seq.map (fun (k,v)-> k)
@@ -19,7 +19,7 @@ let create (directions: 'a list) (maze: Maze) =
     Orientation=direction;
     Maze=maze}
 
-let rec explore (action: Explorer<'a>->Explorer<'a>) (canWalk: Explorer<'a>->bool) walk (explorer: Explorer<'a>) =
+let rec explore (action: Explorer<'direction>->Explorer<'direction>) (canWalk: Explorer<'direction>->bool) walk (explorer: Explorer<'direction>) =
     let exploreNext = explore action canWalk walk
     let newExplorer = explorer |> action
     if newExplorer |> canWalk then

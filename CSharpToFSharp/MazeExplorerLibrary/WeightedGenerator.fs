@@ -1,42 +1,4 @@
-﻿let d6 =
-    [(1, 1);
-    (2, 1);
-    (3, 1);
-    (4, 1);
-    (5, 1);
-    (6, 1);]
-    |> Map.ofSeq
-
-let coin =
-    [(true,1);
-    (false,1)]
-    |> Map.ofSeq
-
-let vowelGenerator = 
-    [("a",1);
-    ("e",1);
-    ("i",1);
-    ("o",1);
-    ("u",1)]
-    |> Map.ofSeq
-
-let twoD6 =
-    [(2, 1);
-    (3, 2);
-    (4, 3);
-    (5, 4);
-    (6, 5);
-    (7, 6);
-    (8, 5);
-    (9, 4);
-    (10, 3);
-    (11, 2);
-    (12, 1);]
-    |> Map.ofSeq
-
-let random = new System.Random()
-
-let rng max = random.Next(max)
+﻿module WeightedGenerator
 
 let totalWeight generator =
     generator
@@ -70,14 +32,3 @@ let combine (keyCombiner: 'a->'a->'b) (first: Map<'a, int>) (second:Map<'a,int>)
     |> Seq.map(fun (k,v)-> (k, v |> Seq.fold (fun acc (_,v2)-> acc + v2) 0))
     |> Map.ofSeq
 
-let test = combine (+) d6 d6
-
-[<EntryPoint>]
-let main argv = 
-    test
-    |> Map.toSeq
-    |> printfn "%A"
-    twoD6
-    |> generate rng
-    |> printfn "%A"
-    0
