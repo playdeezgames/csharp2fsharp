@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RockScissorsPaper", "RockScissorsPaper\RockScissorsPaper.fsproj", "{E8108CBF-4B14-48DA-8D66-D93C1C45EF16}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Sokoban", "Sokoban\Sokoban.fsproj", "{362DE26B-A42B-4404-B6B4-5CD19DEEC0EA}"
