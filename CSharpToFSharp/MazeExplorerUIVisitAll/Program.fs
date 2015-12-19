@@ -5,6 +5,8 @@ open System
 let Redraw graphics =
     Tiles.DoorsNESW
     |> FrameBuffer.RenderTile (0,0)
+    Tiles.ExplorerN
+    |> FrameBuffer.RenderTile (0,0)
 
 let KeyDown event =
     ()
