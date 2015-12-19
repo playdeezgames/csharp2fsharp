@@ -1,16 +1,18 @@
 ﻿open System.Windows.Forms
 open System.Drawing
+open System
 
 let Redraw graphics =
-    Tiles.Tagon
+    Tiles.DoorsNESW
     |> FrameBuffer.RenderTile (0,0)
 
-let KeyDown args =
+let KeyDown event =
     ()
 
 [<EntryPoint>]
+[<STAThread>]
 let main argv = 
     new Size(768, 432)
     |> GameWindow.create "Maze Explorer" Redraw KeyDown
-    |> Application.Run 
+    |> Application.Run
     0

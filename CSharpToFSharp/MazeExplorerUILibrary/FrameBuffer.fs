@@ -9,7 +9,7 @@ let FrameBufferSize = new Size(CellSize.Width * BoardSize.Width, CellSize.Height
 let FrameBuffer = new Bitmap (FrameBufferSize.Width, FrameBufferSize.Height)
 let private context = Graphics.FromImage(FrameBuffer)
 
-let RenderTile (x: int, y: int) (src: Tiles.Tile)  =
+let RenderTile (x: int, y: int) (src: Tile.Tile)  =
     context.DrawImage(src.Bitmap, new Point(x * CellSize.Width,y * CellSize.Height))
 
 

@@ -1,8 +1,8 @@
-﻿module Tiles
+﻿module Tile
 
 open System.Drawing
 
-let rec private DrawPatternRow (row: int) (column: int) (src: bool list) (foreground: Color) (background: Color) (bitmap: Bitmap)=
+let rec DrawPatternRow (row: int) (column: int) (src: bool list) (foreground: Color) (background: Color) (bitmap: Bitmap)=
     match src with
     | [] -> bitmap
     | head :: tail ->
@@ -10,7 +10,7 @@ let rec private DrawPatternRow (row: int) (column: int) (src: bool list) (foregr
         bitmap.SetPixel(column,row,color)
         bitmap |> DrawPatternRow row (column+1) tail foreground background
 
-let rec private DrawPattern (row: int) (src: bool list list) (foreground: Color) (background: Color) (bitmap: Bitmap)=
+let rec DrawPattern (row: int) (src: bool list list) (foreground: Color) (background: Color) (bitmap: Bitmap)=
     match src with
     | [] -> bitmap
     | head :: tail ->
@@ -29,10 +29,5 @@ type Tile(pattern: bool list list, backgroundColor: Colors.PaletteColor, foregro
         let width = x.Pattern |> List.maxBy (fun elem->elem.Length) |> List.length
         let bitmap = new Bitmap(width,height)
         bitmap |> DrawPattern 0 x.Pattern foreground background
-
-let Grass = new Tile(Patterns.Ground, Colors.Onyx, Colors.Jade)
-let Wall = new Tile(Patterns.Bricks, Colors.Onyx, Colors.Silver)
-let Tagon = new Tile(Patterns.Tagon, Colors.Transparent, Colors.RandomSkinTone())
-let Tree = new Tile(Patterns.Tree, Colors.Onyx, Colors.Emerald)
 
 
