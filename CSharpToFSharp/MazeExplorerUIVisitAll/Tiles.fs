@@ -1,5 +1,25 @@
 ﻿module Tiles
 
-let DoorsNESW = new Tile.Tile(Patterns.DoorsNESW, Colors.Transparent, Colors.Copper)
+let Doors0 = new Tile.Tile(Patterns.Doors0, Colors.Transparent, Colors.Emerald)
+let DoorsN = new Tile.Tile(Patterns.DoorsN, Colors.Transparent, Colors.Emerald)
+let DoorsE = new Tile.Tile(Patterns.DoorsE, Colors.Transparent, Colors.Emerald)
+let DoorsNE = new Tile.Tile(Patterns.DoorsNE, Colors.Transparent, Colors.Emerald)
+let DoorsS = new Tile.Tile(Patterns.DoorsS, Colors.Transparent, Colors.Emerald)
+let DoorsNS = new Tile.Tile(Patterns.DoorsNS, Colors.Transparent, Colors.Emerald)
+let DoorsES = new Tile.Tile(Patterns.DoorsES, Colors.Transparent, Colors.Emerald)
+let DoorsNES = new Tile.Tile(Patterns.DoorsNES, Colors.Transparent, Colors.Emerald)
+let DoorsW = new Tile.Tile(Patterns.DoorsW, Colors.Transparent, Colors.Emerald)
+let DoorsNW = new Tile.Tile(Patterns.DoorsNW, Colors.Transparent, Colors.Emerald)
+let DoorsEW = new Tile.Tile(Patterns.DoorsEW, Colors.Transparent, Colors.Emerald)
+let DoorsNEW = new Tile.Tile(Patterns.DoorsNEW, Colors.Transparent, Colors.Emerald)
+let DoorsSW = new Tile.Tile(Patterns.DoorsSW, Colors.Transparent, Colors.Emerald)
+let DoorsNSW = new Tile.Tile(Patterns.DoorsNSW, Colors.Transparent, Colors.Emerald)
+let DoorsESW = new Tile.Tile(Patterns.DoorsESW, Colors.Transparent, Colors.Emerald)
+let DoorsNESW = new Tile.Tile(Patterns.DoorsNESW, Colors.Transparent, Colors.Emerald)
 
 let ExplorerN = new Tile.Tile(Patterns.ExplorerN, Colors.Transparent, Colors.Silver)
+let ExplorerE = new Tile.Tile(Patterns.ExplorerE, Colors.Transparent, Colors.Silver)
+let ExplorerS = new Tile.Tile(Patterns.ExplorerS, Colors.Transparent, Colors.Silver)
+let ExplorerW = new Tile.Tile(Patterns.ExplorerW, Colors.Transparent, Colors.Silver)
+
+let Filled = new Tile.Tile(Patterns.Filled, Colors.Transparent, Colors.Amethyst)

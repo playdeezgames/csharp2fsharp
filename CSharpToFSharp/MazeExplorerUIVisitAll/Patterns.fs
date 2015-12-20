@@ -220,3 +220,13 @@ let ExplorerW =
      "........"]
     |> Pattern.patternFromStringListX
 
+let Filled = 
+    ["XXXXXXXX";
+     "XXXXXXXX";
+     "XXXXXXXX";
+     "XXXXXXXX";
+     "XXXXXXXX";
+     "XXXXXXXX";
+     "XXXXXXXX";
+     "XXXXXXXX"]
+    |> Pattern.patternFromStringListX
