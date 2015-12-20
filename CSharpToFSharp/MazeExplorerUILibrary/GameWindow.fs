@@ -26,6 +26,6 @@ let create caption redrawCallback keydownCallback  initialWindowSize=
                                         e.Graphics
                                         |> renderFrameBuffer window)
     window.Resize.AddHandler (fun _ _ -> window.Invalidate())
-    window.KeyDown.AddHandler (fun _ e -> e |> keydownCallback)
+    window.KeyDown.AddHandler (fun _ e -> if e |> keydownCallback then window.Invalidate() else ())
     window
 

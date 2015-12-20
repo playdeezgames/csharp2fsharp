@@ -27,11 +27,16 @@ let Tracker (explorer: Explorer.Explorer<Cardinal.Direction>) =
     Console.ReadLine() |> ignore
     {explorer with Orientation=Cardinal.values |> Seq.sortBy (fun e->Guid.NewGuid()) |> Seq.head}
 
+let Picker choices =
+    choices
+    |> Seq.sortBy(fun e->Guid.NewGuid())
+    |> Seq.head
+
 [<EntryPoint>]
 let main argv = 
     MakeGrid (4,4)
     |> Maze.makeEmpty
-    |> Maze.generate FindAllCardinal
+    |> Maze.generate Picker FindAllCardinal
     |> Explorer.create Cardinal.values
     |> Explorer.explore Tracker CanWalk CardinalWalk
     |> ignore

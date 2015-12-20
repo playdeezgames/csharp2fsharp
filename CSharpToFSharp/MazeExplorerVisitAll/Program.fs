@@ -93,12 +93,17 @@ let ReportStatusAndDecide explorer =
     |> Decide
     |> ReportDecision
 
+let Picker choices =
+    choices
+    |> Seq.sortBy(fun e->Guid.NewGuid())
+    |> Seq.head
+
 [<EntryPoint>]
 let main argv = 
     let gridLocations = MakeGrid (4,4)
     gridLocations
     |> Maze.makeEmpty
-    |> Maze.generate FindAllCardinal
+    |> Maze.generate Picker FindAllCardinal
     |> Explorer.create Cardinal.values (gridLocations |> Set.ofList)
     |> Explorer.explore IsFinished ReportStatusAndDecide Act
     |> ignore

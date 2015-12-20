@@ -190,7 +190,7 @@ type GameData()=
             currentRun <- currentRun + 1
             gameWindow.Invalidate()
             match tail.Head with
-            | x when x=0 || x=boardSize.Width-1 || x = List.nth blocks (boardSize.Height - tailLength) ->
+            | x when x=0 || x=boardSize.Width-1 || x = List.item (boardSize.Height - tailLength) blocks ->
                 gameState <- Title
             | _ -> ()
         | _ -> ()
