@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Location.fs" />
     <Compile Include="Maze.fs" />
+    <Compile Include="Explorer.fs" />
     <Compile Include="Neighbor.fs" />
     <Compile Include="Cardinal.fs" />
     <Compile Include="Intercardinal.fs" />

@@ -8,15 +8,15 @@ let MakeGrid (columns, rows) =
 
 let FindAllCardinal = Neighbor.findAll Cardinal.walk Cardinal.values
 
-let CardinalWalk (explorer: Explorer.Explorer<Cardinal.Direction>) =
+let CardinalWalk (explorer: Explorer.Explorer<Cardinal.Direction, unit>) =
     {explorer with Position = explorer.Orientation |> Cardinal.walk explorer.Position}
 
-let CanWalk (explorer: Explorer.Explorer<Cardinal.Direction>) =
+let CanWalk (explorer: Explorer.Explorer<Cardinal.Direction, unit>) =
     let next = (explorer |> CardinalWalk).Position
     let room = explorer.Maze.[explorer.Position]
     room.Contains next
 
-let Tracker (explorer: Explorer.Explorer<Cardinal.Direction>) = 
+let Tracker (explorer: Explorer.Explorer<Cardinal.Direction, unit>) = 
     Console.WriteLine("Facing {0}", explorer.Orientation |> Cardinal.toString)
     Console.WriteLine("At location {0}, {1}", explorer.Position.Column, explorer.Position.Row)
     let room = explorer.Maze.[explorer.Position]
@@ -37,7 +37,7 @@ let main argv =
     MakeGrid (4,4)
     |> Maze.makeEmpty
     |> Maze.generate Picker FindAllCardinal
-    |> Explorer.create Cardinal.values
-    |> Explorer.explore Tracker CanWalk CardinalWalk
+    |> Explorer.create Cardinal.values ()
+    |> Wanderer.explore Tracker CanWalk CardinalWalk
     |> ignore
     0

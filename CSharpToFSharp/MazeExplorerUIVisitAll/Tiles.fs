@@ -23,3 +23,4 @@ let ExplorerS = new Tile.Tile(Patterns.ExplorerS, Colors.Transparent, Colors.Sil
 let ExplorerW = new Tile.Tile(Patterns.ExplorerW, Colors.Transparent, Colors.Silver)
 
 let Filled = new Tile.Tile(Patterns.Filled, Colors.Transparent, Colors.Amethyst)
+let Empty = new Tile.Tile(Patterns.Empty, Colors.Onyx, Colors.Onyx)

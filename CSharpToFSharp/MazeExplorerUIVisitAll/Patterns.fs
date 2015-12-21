@@ -230,3 +230,14 @@ let Filled =
      "XXXXXXXX";
      "XXXXXXXX"]
     |> Pattern.patternFromStringListX
+
+let Empty = 
+    ["........";
+     "........";
+     "........";
+     "........";
+     "........";
+     "........";
+     "........";
+     "........"]
+    |> Pattern.patternFromStringListX

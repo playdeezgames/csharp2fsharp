@@ -105,6 +105,6 @@ let main argv =
     |> Maze.makeEmpty
     |> Maze.generate Picker FindAllCardinal
     |> Explorer.create Cardinal.values (gridLocations |> Set.ofList)
-    |> Explorer.explore IsFinished ReportStatusAndDecide Act
+    |> Visitor.explore IsFinished ReportStatusAndDecide Act
     |> ignore
     0

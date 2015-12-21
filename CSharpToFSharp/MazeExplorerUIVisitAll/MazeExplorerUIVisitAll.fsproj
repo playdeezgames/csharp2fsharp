@@ -56,7 +56,6 @@
   <ItemGroup>
     <Compile Include="Patterns.fs" />
     <Compile Include="Tiles.fs" />
-    <Compile Include="Explorer.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
     <Content Include="packages.config" />

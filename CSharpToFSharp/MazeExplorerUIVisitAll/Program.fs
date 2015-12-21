@@ -17,15 +17,18 @@ let picker (choices:seq<'t>) =
     let pick = choices |> Seq.length |> random.Next
     choices |> Seq.item pick
 
-let mutable explorer = 
+let restart () = 
     let gridLocations = 
         makeGrid (32, 18)
-    let explorer = 
+    let newExplorer = 
         gridLocations
         |> Maze.makeEmpty
         |> Maze.generate picker findAllCardinal
         |> Explorer.create Cardinal.values (gridLocations |> Set.ofList)
-    {explorer with State = explorer.State.Remove explorer.Position}
+    {newExplorer with State = newExplorer.State.Remove newExplorer.Position}
+
+let mutable explorer = 
+    restart()
 
 
 let flagify direction =
@@ -76,7 +79,8 @@ let renderRoom (location:Location) (exits:Set<Location>) (visited:bool)=
         Tiles.Filled
         |> FrameBuffer.RenderTile (location.Column, location.Row)
     else
-        ()
+        Tiles.Empty
+        |> FrameBuffer.RenderTile (location.Column, location.Row)
     exits
     |> toDirections location
     |> determineCellTile
@@ -88,10 +92,6 @@ let redraw graphics =
     explorer.Orientation
     |> determineExplorerTile
     |> FrameBuffer.RenderTile (explorer.Position.Column, explorer.Position.Row)
-
-type Command =
-    | TurnOrMove of Cardinal.Direction
-    | Wait
 
 let moveAction (explorer: Explorer<Cardinal.Direction, Set<Location>>) = 
     let next =
@@ -105,28 +105,37 @@ let moveAction (explorer: Explorer<Cardinal.Direction, Set<Location>>) =
 let turnAction direction explorer = 
     {explorer with Orientation = direction}
 
-let act direction explorer =
-    explorer
-    |> turnAction direction
-    |> moveAction
+type Command = 
+     | Turn of Cardinal.Direction
+     | Move
+     | Restart
+     | Wait
+
+let act command explorer =
+    match command with
+    | Turn direction -> explorer |> turnAction direction
+    | Move           -> explorer |> moveAction
+    | Restart        -> restart()
+    | _              -> explorer
 
 let keyCodeToCommand keyCode = 
     match keyCode with
-    | Keys.Up -> Some Cardinal.North
-    | Keys.Right -> Some Cardinal.East
-    | Keys.Down -> Some Cardinal.South
-    | Keys.Left -> Some Cardinal.West
-    | _ -> None
+    | Keys.Up    -> if explorer.Orientation = Cardinal.North then Move else Turn Cardinal.North
+    | Keys.Right -> if explorer.Orientation = Cardinal.East  then Move else Turn Cardinal.East
+    | Keys.Down  -> if explorer.Orientation = Cardinal.South then Move else Turn Cardinal.South
+    | Keys.Left  -> if explorer.Orientation = Cardinal.West  then Move else Turn Cardinal.West
+    | Keys.F2    -> Restart
+    | _          -> Wait
 
 let keyDown (event:KeyEventArgs) =
-    let direction = 
+    let command = 
         event.KeyCode
         |> keyCodeToCommand
-    match direction with
-    | Some d -> 
-                explorer <- explorer |> act d
-                true
-    | None -> false
+    match command with
+    | Wait -> false
+    | _ -> 
+            explorer <- explorer |> act command
+            true
 
 [<EntryPoint>]
 [<STAThread>]
