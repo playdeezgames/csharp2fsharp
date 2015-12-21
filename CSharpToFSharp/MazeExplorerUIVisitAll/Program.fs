@@ -19,13 +19,14 @@ let picker (choices:seq<'t>) =
 
 let mutable explorer = 
     let gridLocations = 
-        makeGrid (8, 8)
+        makeGrid (32, 18)
     let explorer = 
         gridLocations
         |> Maze.makeEmpty
         |> Maze.generate picker findAllCardinal
         |> Explorer.create Cardinal.values (gridLocations |> Set.ofList)
     {explorer with State = explorer.State.Remove explorer.Position}
+
 
 let flagify direction =
     match direction with
@@ -105,10 +106,9 @@ let turnAction direction explorer =
     {explorer with Orientation = direction}
 
 let act direction explorer =
-    if explorer.Orientation = direction then
-        moveAction explorer
-    else
-        turnAction direction explorer
+    explorer
+    |> turnAction direction
+    |> moveAction
 
 let keyCodeToCommand keyCode = 
     match keyCode with
