@@ -31,15 +31,9 @@ let mutable explorer =
     restart()
 
 
-let roomTiles = RoomTiles.createCardinal Colors.Transparent Colors.Emerald
-
-let explorerTiles = ExplorerTiles.createCardinal Colors.Transparent Colors.Silver
-
-let font = FontTiles.create Colors.Transparent Colors.Garnet
-
 let determineCellTile (exits:Set<Cardinal.Direction>) =
     let flags = (exits.Contains Cardinal.North, exits.Contains Cardinal.East, exits.Contains Cardinal.South, exits.Contains Cardinal.West)
-    roomTiles.[flags]
+    Tiles.room.[flags]
 
 let toDirections location (exits:Set<Location>) =
     Cardinal.values
@@ -61,9 +55,9 @@ let renderRoom (location:Location) (exits:Set<Location>) (visited:bool)=
 let redraw graphics =
     explorer.Maze
     |> Map.iter(fun k v -> renderRoom k v (k |> explorer.State.Contains |> not))
-    explorerTiles.[explorer.Orientation]
+    Tiles.explorer.[explorer.Orientation]
     |> FrameBuffer.RenderTile (explorer.Position.Column, explorer.Position.Row)
-    font
+    Tiles.font
     |> FrameBuffer.renderString (0,0) (explorer.State |> Set.count |> string)
 
 let moveAction (explorer: Explorer<Cardinal.Direction, Set<Location>>) = 

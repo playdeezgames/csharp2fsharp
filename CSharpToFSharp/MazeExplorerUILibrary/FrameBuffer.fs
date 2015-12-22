@@ -14,6 +14,6 @@ let RenderTile (x: int, y: int) (src: Tile.Tile)  =
 
 let renderString (x: int,y: int) (text:string) (font: Map<char,Tile.Tile>) =
     text
-    |> Seq.fold (fun col c -> RenderTile(col,y) font.[c]
+    |> Seq.fold (fun col c -> RenderTile (col,y) font.[c]
                               col + 1) x
     |> ignore

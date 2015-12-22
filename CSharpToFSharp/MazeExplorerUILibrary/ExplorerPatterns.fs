@@ -45,3 +45,13 @@ let ExplorerW =
     |> Pattern.patternFromStringListX
 
 
+let Treasure =
+    ["........";
+     ".XXXXX..";
+     "...X....";
+     "...X....";
+     "...X....";
+     "...X....";
+     "........";
+     "........"]
+    |> Pattern.patternFromStringListX

@@ -9,4 +9,4 @@ let createCardinal background foreground =
     |> Map.ofSeq
 
 
-
+let Treasure = new Tile.Tile(ExplorerPatterns.Treasure, Colors.Transparent, Colors.Gold)

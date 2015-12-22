@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RockScissorsPaper", "RockScissorsPaper\RockScissorsPaper.fsproj", "{E8108CBF-4B14-48DA-8D66-D93C1C45EF16}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Sokoban", "Sokoban\Sokoban.fsproj", "{362DE26B-A42B-4404-B6B4-5CD19DEEC0EA}"
@@ -24,6 +26,8 @@ EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "MazeExplorerUILibrary", "MazeExplorerUILibrary\MazeExplorerUILibrary.fsproj", "{3D81A38C-F39B-46E8-9E5F-33211BC21AB2}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "MazeExplorerUIVisitAll", "MazeExplorerUIVisitAll\MazeExplorerUIVisitAll.fsproj", "{0CD9E6C8-E6C4-412B-9979-07F74D22F5B4}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "MazeExplorer.TreasureHunt.UI", "MazeExplorer.TreasureHunt.UI\MazeExplorer.TreasureHunt.UI.fsproj", "{771DC29F-EE23-483D-ABA1-3A113B16F41E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +83,10 @@ Global
 		{0CD9E6C8-E6C4-412B-9979-07F74D22F5B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CD9E6C8-E6C4-412B-9979-07F74D22F5B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CD9E6C8-E6C4-412B-9979-07F74D22F5B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{771DC29F-EE23-483D-ABA1-3A113B16F41E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{771DC29F-EE23-483D-ABA1-3A113B16F41E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{771DC29F-EE23-483D-ABA1-3A113B16F41E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{771DC29F-EE23-483D-ABA1-3A113B16F41E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
