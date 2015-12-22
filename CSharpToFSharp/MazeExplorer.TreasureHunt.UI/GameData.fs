@@ -8,7 +8,7 @@ let TileRows = 18
 let MazeColumns = 24
 let MazeRows = TileRows
 
-type State = {Visited: Set<Location>; Treasures: Set<Location>; Visible: Set<Location>}
+type State = {Visited: Set<Location>; Treasures: Set<Location>; Visible: Set<Location>; Loot:int}
 
 let rec visibleLocations (location:Location, direction:Cardinal.Direction, maze:Maze.Maze) =
     let nextLocation = Cardinal.walk location direction
@@ -33,7 +33,7 @@ let restart () :Explorer<Cardinal.Direction, State>=
         gridLocations
         |> Maze.makeEmpty
         |> Maze.generate Utility.picker Utility.findAllCardinal
-        |> Explorer.create Cardinal.values {Visited=Set.empty; Treasures=Set.empty;Visible=Set.empty}
+        |> Explorer.create (fun m l -> (m.[l] |> Set.count) > 1) Cardinal.values {Visited=Set.empty; Treasures=Set.empty;Visible=Set.empty;Loot=0}
     {newExplorer with 
         State = {newExplorer.State with 
                     Treasures = treasureLocations newExplorer.Maze;
@@ -45,7 +45,13 @@ let moveAction (explorer: Explorer<Cardinal.Direction, State>) =
         explorer.Orientation
         |> Cardinal.walk explorer.Position
     if next |> explorer.Maze.[explorer.Position].Contains then
-        {explorer with Position=next; State={explorer.State with Visited=next |> explorer.State.Visited.Add; Visible = visibleLocations(next, explorer.Orientation, explorer.Maze)}}
+        {explorer with 
+            Position = next; 
+            State = {explorer.State with 
+                        Visited = next |> explorer.State.Visited.Add; 
+                        Visible = visibleLocations(next, explorer.Orientation, explorer.Maze)
+                        Treasures = next |> explorer.State.Treasures.Remove
+                        Loot = if next |> explorer.State.Treasures.Contains then explorer.State.Loot + 1 else explorer.State.Loot}}
     else
         explorer
 

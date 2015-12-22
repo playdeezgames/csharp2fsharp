@@ -37,7 +37,7 @@ let main argv =
     MakeGrid (4,4)
     |> Maze.makeEmpty
     |> Maze.generate Picker FindAllCardinal
-    |> Explorer.create Cardinal.values ()
+    |> Explorer.create (fun m l -> true) Cardinal.values ()
     |> Wanderer.explore Tracker CanWalk CardinalWalk
     |> ignore
     0

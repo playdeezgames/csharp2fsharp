@@ -24,7 +24,7 @@ let restart () =
         gridLocations
         |> Maze.makeEmpty
         |> Maze.generate picker findAllCardinal
-        |> Explorer.create Cardinal.values (gridLocations |> Set.ofList)
+        |> Explorer.create (fun m l -> true) Cardinal.values (gridLocations |> Set.ofList)
     {newExplorer with State = newExplorer.State.Remove newExplorer.Position}
 
 let mutable explorer = 

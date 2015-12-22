@@ -41,7 +41,9 @@ let redraw graphics =
     |> Map.iter(fun k v -> renderRoom k v (k |> explorer.State.Visited.Contains) (k |> explorer.State.Visible.Contains) (k |> explorer.State.Treasures.Contains))
     Tiles.explorer.[explorer.Orientation]
     |> FrameBuffer.RenderTile (explorer.Position.Column, explorer.Position.Row)
-    Tiles.font
+    Tiles.garnetFont
     |> FrameBuffer.renderString (MazeColumns,0) (explorer.State.Visited |> Set.count |> string)
+    Tiles.goldFont
+    |> FrameBuffer.renderString (MazeColumns,1) (explorer.State.Loot |> string)
 
 
