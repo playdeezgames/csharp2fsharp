@@ -31,48 +31,20 @@ let mutable explorer =
     restart()
 
 
-let flagify direction =
-    match direction with
-    | Cardinal.North -> 1
-    | Cardinal.East -> 2
-    | Cardinal.South -> 4
-    | Cardinal.West -> 8
+let roomTiles = RoomTiles.createCardinal Colors.Transparent Colors.Emerald
 
-let determineCellTile exits =
-    let flags = 
-        exits
-        |> Set.toSeq
-        |> Seq.map flagify
-        |> Seq.reduce (+)
-    match flags with
-    | 1 -> Tiles.DoorsN
-    | 2 -> Tiles.DoorsE
-    | 3 -> Tiles.DoorsNE
-    | 4 -> Tiles.DoorsS
-    | 5 -> Tiles.DoorsNS
-    | 6 -> Tiles.DoorsES
-    | 7 -> Tiles.DoorsNES
-    | 8 -> Tiles.DoorsW
-    | 9 -> Tiles.DoorsNW
-    | 10 -> Tiles.DoorsEW
-    | 11 -> Tiles.DoorsNEW
-    | 12 -> Tiles.DoorsSW
-    | 13 -> Tiles.DoorsNSW
-    | 14 -> Tiles.DoorsESW
-    | 15 -> Tiles.DoorsNESW
-    | _ -> Tiles.Doors0
+let explorerTiles = ExplorerTiles.createCardinal Colors.Transparent Colors.Silver
+
+let font = FontTiles.create Colors.Transparent Colors.Garnet
+
+let determineCellTile (exits:Set<Cardinal.Direction>) =
+    let flags = (exits.Contains Cardinal.North, exits.Contains Cardinal.East, exits.Contains Cardinal.South, exits.Contains Cardinal.West)
+    roomTiles.[flags]
 
 let toDirections location (exits:Set<Location>) =
     Cardinal.values
     |> List.filter (fun d->d |> Cardinal.walk location |> exits.Contains )
     |> Set.ofList
-
-let determineExplorerTile direction =
-    match direction with
-    | Cardinal.North -> Tiles.ExplorerN
-    | Cardinal.East  -> Tiles.ExplorerE
-    | Cardinal.South -> Tiles.ExplorerS
-    | Cardinal.West  -> Tiles.ExplorerW
 
 let renderRoom (location:Location) (exits:Set<Location>) (visited:bool)=
     if visited then
@@ -89,9 +61,10 @@ let renderRoom (location:Location) (exits:Set<Location>) (visited:bool)=
 let redraw graphics =
     explorer.Maze
     |> Map.iter(fun k v -> renderRoom k v (k |> explorer.State.Contains |> not))
-    explorer.Orientation
-    |> determineExplorerTile
+    explorerTiles.[explorer.Orientation]
     |> FrameBuffer.RenderTile (explorer.Position.Column, explorer.Position.Row)
+    font
+    |> FrameBuffer.renderString (0,0) (explorer.State |> Set.count |> string)
 
 let moveAction (explorer: Explorer<Cardinal.Direction, Set<Location>>) = 
     let next =

@@ -56,6 +56,13 @@
     <Compile Include="FrameBuffer.fs" />
     <Compile Include="GameWindow.fs" />
     <Content Include="packages.config" />
+    <Compile Include="RoomPatterns.fs" />
+    <Compile Include="ExplorerPatterns.fs" />
+    <Compile Include="CommonPatterns.fs" />
+    <Compile Include="CharacterPatterns.fs" />
+    <Compile Include="RoomTiles.fs" />
+    <Compile Include="ExplorerTiles.fs" />
+    <Compile Include="FontTiles.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Core">
@@ -68,6 +75,13 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MazeExplorerLibrary\MazeExplorerLibrary.fsproj">
+      <Name>MazeExplorerLibrary</Name>
+      <Project>{752f2e8a-8833-45f2-8722-ca03357ea4dd}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

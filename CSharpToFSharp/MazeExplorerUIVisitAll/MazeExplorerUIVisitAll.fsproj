@@ -54,7 +54,6 @@
   </Choose>
   <Import Project="$(FSharpTargetsPath)" Condition="Exists('$(FSharpTargetsPath)')" />
   <ItemGroup>
-    <Compile Include="Patterns.fs" />
     <Compile Include="Tiles.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />

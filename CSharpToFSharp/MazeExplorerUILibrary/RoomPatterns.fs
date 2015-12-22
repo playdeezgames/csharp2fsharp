@@ -1,6 +1,6 @@
-﻿module Patterns
+﻿module RoomPatterns
 
-let Doors0 =
+let Rooms0 =
     ["XXXXXXXX";
      "X......X";
      "X......X";
@@ -11,7 +11,7 @@ let Doors0 =
      "XXXXXXXX"]
     |> Pattern.patternFromStringListX
 
-let DoorsN = 
+let RoomsN = 
     ["X......X";
      "X......X";
      "X......X";
@@ -22,7 +22,7 @@ let DoorsN =
      "XXXXXXXX"]
     |> Pattern.patternFromStringListX
 
-let DoorsE =
+let RoomsE =
     ["XXXXXXXX";
      "X.......";
      "X.......";
@@ -33,7 +33,7 @@ let DoorsE =
      "XXXXXXXX"]
     |> Pattern.patternFromStringListX
 
-let DoorsNE = 
+let RoomsNE = 
     ["X......X";
      "X.......";
      "X.......";
@@ -44,7 +44,7 @@ let DoorsNE =
      "XXXXXXXX"]
     |> Pattern.patternFromStringListX
 
-let DoorsS =
+let RoomsS =
     ["XXXXXXXX";
      "X......X";
      "X......X";
@@ -55,7 +55,7 @@ let DoorsS =
      "X......X"]
     |> Pattern.patternFromStringListX
 
-let DoorsNS = 
+let RoomsNS = 
     ["X......X";
      "X......X";
      "X......X";
@@ -66,7 +66,7 @@ let DoorsNS =
      "X......X"]
     |> Pattern.patternFromStringListX
 
-let DoorsES =
+let RoomsES =
     ["XXXXXXXX";
      "X.......";
      "X.......";
@@ -77,7 +77,7 @@ let DoorsES =
      "X......X"]
     |> Pattern.patternFromStringListX
 
-let DoorsNES = 
+let RoomsNES = 
     ["X......X";
      "X.......";
      "X.......";
@@ -88,7 +88,7 @@ let DoorsNES =
      "X......X"]
     |> Pattern.patternFromStringListX
 
-let DoorsW =
+let RoomsW =
     ["XXXXXXXX";
      ".......X";
      ".......X";
@@ -99,7 +99,7 @@ let DoorsW =
      "XXXXXXXX"]
     |> Pattern.patternFromStringListX
 
-let DoorsNW = 
+let RoomsNW = 
     ["X......X";
      ".......X";
      ".......X";
@@ -110,7 +110,7 @@ let DoorsNW =
      "XXXXXXXX"]
     |> Pattern.patternFromStringListX
 
-let DoorsEW =
+let RoomsEW =
     ["XXXXXXXX";
      "........";
      "........";
@@ -121,7 +121,7 @@ let DoorsEW =
      "XXXXXXXX"]
     |> Pattern.patternFromStringListX
 
-let DoorsNEW = 
+let RoomsNEW = 
     ["X......X";
      "........";
      "........";
@@ -132,7 +132,7 @@ let DoorsNEW =
      "XXXXXXXX"]
     |> Pattern.patternFromStringListX
 
-let DoorsSW =
+let RoomsSW =
     ["XXXXXXXX";
      ".......X";
      ".......X";
@@ -143,7 +143,7 @@ let DoorsSW =
      "X......X"]
     |> Pattern.patternFromStringListX
 
-let DoorsNSW = 
+let RoomsNSW = 
     ["X......X";
      ".......X";
      ".......X";
@@ -154,7 +154,7 @@ let DoorsNSW =
      "X......X"]
     |> Pattern.patternFromStringListX
 
-let DoorsESW =
+let RoomsESW =
     ["XXXXXXXX";
      "........";
      "........";
@@ -165,7 +165,7 @@ let DoorsESW =
      "X......X"]
     |> Pattern.patternFromStringListX
 
-let DoorsNESW = 
+let RoomsNESW = 
     ["X......X";
      "........";
      "........";
@@ -176,68 +176,4 @@ let DoorsNESW =
      "X......X"]
     |> Pattern.patternFromStringListX
 
-let ExplorerN =
-    ["........";
-     "...X....";
-     "..XXX...";
-     ".X.X.X..";
-     "...X....";
-     "...X....";
-     "........";
-     "........"]
-    |> Pattern.patternFromStringListX
 
-let ExplorerE =
-    ["........";
-     "...X....";
-     "....X...";
-     ".XXXXX..";
-     "....X...";
-     "...X....";
-     "........";
-     "........"]
-    |> Pattern.patternFromStringListX
-
-let ExplorerS =
-    ["........";
-     "...X....";
-     "...X....";
-     ".X.X.X..";
-     "..XXX...";
-     "...X....";
-     "........";
-     "........"]
-    |> Pattern.patternFromStringListX
-
-let ExplorerW =
-    ["........";
-     "...X....";
-     "..X.....";
-     ".XXXXX..";
-     "..X.....";
-     "...X....";
-     "........";
-     "........"]
-    |> Pattern.patternFromStringListX
-
-let Filled = 
-    ["XXXXXXXX";
-     "XXXXXXXX";
-     "XXXXXXXX";
-     "XXXXXXXX";
-     "XXXXXXXX";
-     "XXXXXXXX";
-     "XXXXXXXX";
-     "XXXXXXXX"]
-    |> Pattern.patternFromStringListX
-
-let Empty = 
-    ["........";
-     "........";
-     "........";
-     "........";
-     "........";
-     "........";
-     "........";
-     "........"]
-    |> Pattern.patternFromStringListX
