@@ -95,8 +95,10 @@ let ReportStatusAndDecide explorer =
 
 let Picker choices =
     choices
-    |> Seq.sortBy(fun e->Guid.NewGuid())
+    |> Seq.sortBy(fun e->random.Next())
     |> Seq.head
+
+let createExplorer = Explorer.create (fun l->random.Next()) (fun d->random.Next())
 
 [<EntryPoint>]
 let main argv = 
@@ -104,7 +106,7 @@ let main argv =
     gridLocations
     |> Maze.makeEmpty
     |> Maze.generate Picker FindAllCardinal
-    |> Explorer.create (fun m l -> true) Cardinal.values (gridLocations |> Set.ofList)
+    |> createExplorer (fun m l -> true) Cardinal.values (gridLocations |> Set.ofList)
     |> Visitor.explore IsFinished ReportStatusAndDecide Act
     |> ignore
     0

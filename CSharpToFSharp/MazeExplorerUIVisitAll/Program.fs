@@ -17,6 +17,8 @@ let picker (choices:seq<'t>) =
     let pick = choices |> Seq.length |> random.Next
     choices |> Seq.item pick
 
+let createExplorer = Explorer.create (fun l->random.Next()) (fun d->random.Next())
+
 let restart () = 
     let gridLocations = 
         makeGrid (32, 18)
@@ -24,7 +26,7 @@ let restart () =
         gridLocations
         |> Maze.makeEmpty
         |> Maze.generate picker findAllCardinal
-        |> Explorer.create (fun m l -> true) Cardinal.values (gridLocations |> Set.ofList)
+        |> createExplorer (fun m l -> true) Cardinal.values (gridLocations |> Set.ofList)
     {newExplorer with State = newExplorer.State.Remove newExplorer.Position}
 
 let mutable explorer = 

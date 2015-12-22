@@ -1,6 +1,8 @@
 ﻿open Location
 open System
 
+let random = new System.Random();
+
 let MakeGrid (columns, rows) = 
     [for c in [0..columns-1] do
         for r in [0..rows-1] do
@@ -25,19 +27,21 @@ let Tracker (explorer: Explorer.Explorer<Cardinal.Direction, unit>) =
     |> List.map (fun v->v |> Cardinal.toString)
     |> List.iter(fun v-> Console.WriteLine("Can go {0}",v))
     Console.ReadLine() |> ignore
-    {explorer with Orientation=Cardinal.values |> Seq.sortBy (fun e->Guid.NewGuid()) |> Seq.head}
+    {explorer with Orientation=Cardinal.values |> Seq.sortBy (fun e->random.Next()) |> Seq.head}
 
 let Picker choices =
     choices
-    |> Seq.sortBy(fun e->Guid.NewGuid())
+    |> Seq.sortBy(fun e->random.Next())
     |> Seq.head
+
+let createExplorer = Explorer.create (fun l->random.Next()) (fun d->random.Next())
 
 [<EntryPoint>]
 let main argv = 
     MakeGrid (4,4)
     |> Maze.makeEmpty
     |> Maze.generate Picker FindAllCardinal
-    |> Explorer.create (fun m l -> true) Cardinal.values ()
+    |> createExplorer (fun m l -> true) Cardinal.values ()
     |> Wanderer.explore Tracker CanWalk CardinalWalk
     |> ignore
     0

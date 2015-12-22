@@ -60,8 +60,10 @@ let rec readPlayerChoice =
     then input.Value 
     else readPlayerChoice()
 
+let random = new System.Random()
+
 let randomChoice = fun()->
-    choices|>List.sortBy(fun x->System.Guid.NewGuid())|>List.head
+    choices|>List.sortBy(fun x->random.Next())|>List.head
 
 let resultMessage x =
     let resultDescriptor = 

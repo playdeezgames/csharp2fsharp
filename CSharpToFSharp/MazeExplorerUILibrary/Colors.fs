@@ -35,6 +35,7 @@ let GetDrawingColor = function
 let SkinTones = [DarkestTone; DarkerTone; DarkTone; MediumDarkTone; MediumTone; MediumLightTone; LightTone; LighterTone; LightestTone]
 
 let RandomSkinTone() =
+    let random = new System.Random()
     SkinTones 
-    |> List.sortBy(fun elem -> Guid.NewGuid()) 
+    |> List.sortBy(fun elem -> random.Next()) 
     |> List.head

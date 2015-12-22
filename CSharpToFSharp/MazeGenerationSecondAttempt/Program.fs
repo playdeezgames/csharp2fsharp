@@ -29,19 +29,21 @@ let AddConnections (fromLocation: Location) (toLocation:Location) (maze: Map<Loc
     |> AddConnection fromLocation toLocation
     |> AddConnection toLocation fromLocation
 
+let random = new System.Random()
+
 let ChooseStart (condition:Location->bool) (maze: Map<Location, Set<Location> >) =
     maze 
     |> Map.toSeq
     |> Seq.map (fun (k,v) -> k)
     |> Seq.filter(condition)
-    |> Seq.sortBy (fun e-> System.Guid.NewGuid()) 
+    |> Seq.sortBy (fun e-> random.Next()) 
     |> Seq.head
 
 let ChooseNeighbor (neighborFinder:Location -> Location list) (maze: Map<Location, Set<Location> >) (location: Location) =
     location
     |> neighborFinder
     |> Seq.filter (fun e-> maze.ContainsKey(e))
-    |> Seq.sortBy (fun e-> System.Guid.NewGuid()) 
+    |> Seq.sortBy (fun e-> random.Next()) 
     |> Seq.head
 
 let StartMaze (neighborFinder:Location -> Location list) (maze: Map<Location, Set<Location> >) =

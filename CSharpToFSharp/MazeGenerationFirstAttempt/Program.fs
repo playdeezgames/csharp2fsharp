@@ -72,10 +72,12 @@ let IsBlank (cells: Cell list) =
     |> List.filter (fun c-> not c.ConnectedNeighbors.IsEmpty)
     |> List.isEmpty
 
+let random = new System.Random()
+
 let StartMaze (cells: Cell list) = 
-    let originalCell = cells |> List.sortBy(fun e-> System.Guid.NewGuid()) |> List.head
+    let originalCell = cells |> List.sortBy(fun e->random.Next()) |> List.head
     let originalLocation = originalCell.Location
-    let nextDirection = originalCell.UnconnectedNeighbors|> Set.toList |> List.sortBy(fun e-> System.Guid.NewGuid()) |> List.head
+    let nextDirection = originalCell.UnconnectedNeighbors|> Set.toList |> List.sortBy(fun e->random.Next()) |> List.head
     let nextLocation = let nextX, nextY = nextDirection |> Walk (originalLocation.X, originalLocation.Y)
                        { X = nextX; Y = nextY}
     let nextCell = cells |> List.find(fun e->e.Location=nextLocation)
@@ -104,7 +106,7 @@ let AddRoom (cells: Cell list) =
                                                                                                              {X = neighborX; Y = neighborY})
                                             Set.intersect neighbors connectedLocations 
                                             |> Set.isEmpty |> not)
-    let frontierCell = frontierCells |> List.sortBy (fun e->System.Guid.NewGuid()) |> List.head
+    let frontierCell = frontierCells |> List.sortBy (fun e->random.Next()) |> List.head
     let frontierLocation = frontierCell.Location
     let nextDirection, nextLocation = 
                        let neighbors = frontierCell.UnconnectedNeighbors |> Set.map(
@@ -116,7 +118,7 @@ let AddRoom (cells: Cell list) =
                                                     connectedLocations.Contains(l)
                                                     )
                        |> Set.toList
-                       |> List.sortBy(fun e->System.Guid.NewGuid()) 
+                       |> List.sortBy(fun e->random.Next()) 
                        |> List.head
     let nextCell = cells |> List.find(fun e->e.Location=nextLocation)
     let otherCells = cells |> List.filter(fun e-> e <> frontierCell && e <> nextCell)

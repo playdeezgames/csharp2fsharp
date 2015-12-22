@@ -8,7 +8,11 @@ let TileRows = 18
 let MazeColumns = 24
 let MazeRows = TileRows
 
-type State = {Visited: Set<Location>; Treasures: Set<Location>; Visible: Set<Location>; Loot:int}
+type State = 
+    {Visited: Set<Location>; 
+    Treasures: Set<Location>; 
+    Visible: Set<Location>; 
+    Loot:int}
 
 let rec visibleLocations (location:Location, direction:Cardinal.Direction, maze:Maze.Maze) =
     let nextLocation = Cardinal.walk location direction
@@ -26,6 +30,8 @@ let treasureLocations (maze:Maze.Maze) =
     |> Seq.map (fun (location, exits) -> location)
     |> Set.ofSeq
 
+let createExplorer = Explorer.create (fun l->Utility.random.Next()) (fun d->Utility.random.Next())
+
 let restart () :Explorer<Cardinal.Direction, State>= 
     let gridLocations = 
         Utility.makeGrid (MazeColumns, MazeRows)
@@ -33,7 +39,7 @@ let restart () :Explorer<Cardinal.Direction, State>=
         gridLocations
         |> Maze.makeEmpty
         |> Maze.generate Utility.picker Utility.findAllCardinal
-        |> Explorer.create (fun m l -> (m.[l] |> Set.count) > 1) Cardinal.values {Visited=Set.empty; Treasures=Set.empty;Visible=Set.empty;Loot=0}
+        |> createExplorer (fun m l -> (m.[l] |> Set.count) > 1) Cardinal.values {Visited=Set.empty; Treasures=Set.empty;Visible=Set.empty;Loot=0}
     {newExplorer with 
         State = {newExplorer.State with 
                     Treasures = treasureLocations newExplorer.Maze;

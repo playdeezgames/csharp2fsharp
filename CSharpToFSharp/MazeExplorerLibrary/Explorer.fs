@@ -9,15 +9,15 @@ type Explorer<'direction,'state> =
     Maze: Maze; 
     State:'state}
 
-let create (spawnFilter: Maze -> Location -> bool) (directions: 'direction list) (state:'state) (maze: Maze) =
+let create (locationSorter: Location->'random) (directionSorter: 'direction->'random) (spawnFilter: Maze -> Location -> bool) (directions: 'direction list) (state:'state) (maze: Maze) =
     let position = maze
                    |> Map.toSeq
                    |> Seq.map (fun (k,v)-> k)
                    |> Seq.filter (fun location-> location |> spawnFilter maze)
-                   |> Seq.sortBy (fun e-> System.Guid.NewGuid())
+                   |> Seq.sortBy (locationSorter)
                    |> Seq.head
     let direction = directions
-                    |> List.sortBy (fun e-> System.Guid.NewGuid())
+                    |> List.sortBy (directionSorter)
                     |> List.head
     {Position=position;
     Orientation=direction;
