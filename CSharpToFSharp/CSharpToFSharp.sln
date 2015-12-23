@@ -29,6 +29,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "MazeExplorerUIVisitAll", "M
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "MazeExplorer.TreasureHunt.UI", "MazeExplorer.TreasureHunt.UI\MazeExplorer.TreasureHunt.UI.fsproj", "{771DC29F-EE23-483D-ABA1-3A113B16F41E}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "MazeExplorer.TrapsAndTreasures.UI", "MazeExplorer.TrapsAndTreasures.UI\MazeExplorer.TrapsAndTreasures.UI.fsproj", "{84B56562-49B4-4D89-9512-BD7116085673}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{771DC29F-EE23-483D-ABA1-3A113B16F41E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{771DC29F-EE23-483D-ABA1-3A113B16F41E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{771DC29F-EE23-483D-ABA1-3A113B16F41E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84B56562-49B4-4D89-9512-BD7116085673}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84B56562-49B4-4D89-9512-BD7116085673}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84B56562-49B4-4D89-9512-BD7116085673}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84B56562-49B4-4D89-9512-BD7116085673}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
