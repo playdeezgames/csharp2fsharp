@@ -7,6 +7,8 @@ let TileColumns = 32
 let TileRows = 18
 let MazeColumns = 24
 let MazeRows = TileRows
+let InitialHealth = 3
+let TimeLimit = 300
 
 type ItemType = 
     | Treasure
@@ -23,7 +25,8 @@ type State =
     Items: Map<Location,ItemType>; 
     Visible: Set<Location>; 
     Loot:int;
-    Health:int}
+    Health:int;
+    StartTime: System.DateTime}
 
 let rec visibleLocations (location:Location, direction:Cardinal.Direction, maze:Maze.Maze) =
     let nextLocation = Cardinal.walk location direction
@@ -43,6 +46,38 @@ let itemLocations (maze:Maze.Maze) =
 
 let createExplorer = Explorer.create (fun l->Utility.random.Next()) (fun d->Utility.random.Next())
 
+let wonGame (explorer:Explorer.Explorer<Cardinal.Direction,State>) =
+    explorer.State.Items
+    |> Map.tryPick (fun k v -> if v = Treasure then Some k else None)
+    |> Option.isNone
+
+let isDead explorer = 
+    explorer.State.Health <= 0
+
+type ExplorerState = 
+    | Win
+    | Alive
+    | Dead
+    | OutOfTime
+
+let getTimeLeft explorer =
+    let elapsed = (System.DateTime.Now - explorer.State.StartTime).TotalSeconds |> int
+    if elapsed >= TimeLimit then
+        0
+    else
+        TimeLimit - elapsed
+
+let getExplorerState explorer = 
+    if explorer |> isDead then
+        Dead
+    elif explorer |> wonGame then
+        Win
+    elif (explorer |> getTimeLeft) <= 0 then
+        OutOfTime
+    else
+        Alive
+
+
 let restart () :Explorer<Cardinal.Direction, State>= 
     let gridLocations = 
         Utility.makeGrid (MazeColumns, MazeRows)
@@ -50,31 +85,38 @@ let restart () :Explorer<Cardinal.Direction, State>=
         gridLocations
         |> Maze.makeEmpty
         |> Maze.generate Utility.picker Utility.findAllCardinal
-        |> createExplorer (fun m l -> (m.[l] |> Set.count) > 1) Cardinal.values {Visited=Set.empty; Items=Map.empty;Visible=Set.empty;Loot=0;Health=10}
+        |> createExplorer (fun m l -> (m.[l] |> Set.count) > 1) Cardinal.values {Visited=Set.empty; Items=Map.empty; Visible=Set.empty; Loot=0; Health=InitialHealth; StartTime=System.DateTime.Now}
     {newExplorer with 
         State = {newExplorer.State with 
                     Items = itemLocations newExplorer.Maze;
                     Visible = visibleLocations (newExplorer.Position, newExplorer.Orientation, newExplorer.Maze); 
                     Visited = [newExplorer.Position] |> Set.ofSeq}}
 
+let updateState next explorer =
+    {explorer.State with 
+        Visited = next |> explorer.State.Visited.Add |> Set.union explorer.State.Visible; 
+        Visible = visibleLocations(next, explorer.Orientation, explorer.Maze)
+        Items = next |> explorer.State.Items.Remove
+        Loot = if next |> explorer.State.Items.ContainsKey && explorer.State.Items.[next] = Treasure then explorer.State.Loot + 1 else explorer.State.Loot
+        Health = if next |> explorer.State.Items.ContainsKey && explorer.State.Items.[next] = Trap then explorer.State.Health - 1 else explorer.State.Health }
+
+let enterLocation next explorer =
+    {explorer with 
+        Position = next; 
+        State = explorer |> updateState next}
+
 let moveAction (explorer: Explorer<Cardinal.Direction, State>) = 
     let next =
         explorer.Orientation
         |> Cardinal.walk explorer.Position
     if next |> explorer.Maze.[explorer.Position].Contains then
-        {explorer with 
-            Position = next; 
-            State = {explorer.State with 
-                        Visited = next |> explorer.State.Visited.Add; 
-                        Visible = visibleLocations(next, explorer.Orientation, explorer.Maze)
-                        Items = next |> explorer.State.Items.Remove
-                        Loot = if next |> explorer.State.Items.ContainsKey && explorer.State.Items.[next] = Treasure then explorer.State.Loot + 1 else explorer.State.Loot
-                        Health = if next |> explorer.State.Items.ContainsKey && explorer.State.Items.[next] = Trap then explorer.State.Health - 1 else explorer.State.Health }}
+        explorer
+        |> enterLocation next
     else
         explorer
 
 let turnAction direction explorer = 
-    {explorer with Orientation = direction; State={explorer.State with Visible = visibleLocations(explorer.Position, direction, explorer.Maze)}}
+    {explorer with Orientation = direction; State={explorer.State with Visited = explorer.State.Visited |> Set.union explorer.State.Visible; Visible = visibleLocations(explorer.Position, direction, explorer.Maze)}}
 
 type Command = 
      | Turn of Cardinal.Direction
@@ -84,8 +126,8 @@ type Command =
 
 let act command explorer =
     match command with
-    | Turn direction -> if explorer.State.Health>0 then explorer |> turnAction direction else explorer
-    | Move           -> if explorer.State.Health>0 then explorer |> moveAction else explorer
+    | Turn direction -> if (explorer |> getExplorerState) = Alive then explorer |> turnAction direction else explorer
+    | Move           -> if (explorer |> getExplorerState) = Alive then explorer |> moveAction else explorer
     | Restart        -> restart()
     | _              -> explorer
 

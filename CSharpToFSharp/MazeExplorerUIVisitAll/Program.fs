@@ -110,6 +110,6 @@ let keyDown (event:KeyEventArgs) =
 [<STAThread>]
 let main argv = 
     new Size(768, 432)
-    |> GameWindow.create "Maze Explorer" redraw keyDown
+    |> GameWindow.create "Maze Explorer" (fun w->w) redraw keyDown
     |> Application.Run
     0
